@@ -1,10 +1,10 @@
 %% ----------------------------------------------------------------------%%
 % ----------------------- SEQUENCES PREPARATION --------------------------%
 % ------------------------------------------------------------------------%
-addpath(genpath('../trunk'));
+addpath(genpath('..\trunk'));
 
-input_bkgs = loadImages('Dataset/Demo1/bkg','jpg',0);
-input_seq = loadImages('Dataset/Demo1/seq','jpg',1);
+input_bkgs = loadImages('Dataset\Demo1\bkg','jpg',0);
+input_seq = loadImages('Dataset\Demo1\seq','jpg',1);
 
 
 %% ----------------------------------------------------------------------%%
@@ -76,16 +76,16 @@ title('RGB thresholding with Genetic algorithm')
 %% Silhouettes preparation
 % Save the images representing the silhouettes in a directory, for later
 % usage.
-silhPath = strcat(pwd,'/Dataset/Demo1/silhs');
+silhPath = strcat(pwd,'\Dataset\Demo1\silhs');
 if ~exist(silhPath,'dir')
     mkdir(silhPath);
     addpath(silhPath); % if it exist it has been already inserted in the Matlab datapath
 else
-    delete(strcat(silhPath,'/*'));
+    delete(strcat(silhPath,'\*'));
 end
 
 for i = 1:length(silhGMM)
-    imwrite(silhGMM{i},strcat(silhPath,'/',sprintf('SILH_%.4d.jpg',i)));
+    imwrite(silhGMM{i},strcat(silhPath,'\',sprintf('SILH_%.4d.jpg',i)));
 end
 
 %% Foreground extraction (silhouettes from gaussian mixture model)
@@ -95,16 +95,16 @@ foreGMM = detachForeground(input_seq,silhGMM);
 
 % Save the images representing the foreground in a directory, for later
 % usage.
-fgPath = strcat(pwd,'/Dataset/Demo1/fg');
+fgPath = strcat(pwd,'\Dataset\Demo1\fg');
 if ~exist(fgPath,'dir')
     mkdir(fgPath);
     addpath(fgPath); % if it exist it has been already inserted in the Matlab datapath
 else
-    delete(strcat(fgPath,'/*'));
+    delete(strcat(fgPath,'\*'));
 end
 
 for i = 1:length(foreGMM)
-    imwrite(foreGMM{i},strcat(fgPath,'/',sprintf('FG_%.4d.jpg',i)));
+    imwrite(foreGMM{i},strcat(fgPath,'\',sprintf('FG_%.4d.jpg',i)));
 end
 
 
